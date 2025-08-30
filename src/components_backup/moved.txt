@@ -1,0 +1,1 @@
+Original components directory moved here to prevent dynamic import issues from external library dependencies like @radix-ui, lucide-react, motion/react, etc.

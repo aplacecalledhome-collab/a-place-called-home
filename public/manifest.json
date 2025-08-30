@@ -1,0 +1,21 @@
+{
+  "short_name": "APCH",
+  "name": "A Place Called Home LLC",
+  "description": "Licensed Type B small-home assisted living in DeSoto, TX. 24/7 care, RN oversight, medication management, and home-cooked meals for up to 6 residents.",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1e293b",
+  "background_color": "#ffffff"
+}
