@@ -37,7 +37,7 @@ const seoPlugin = () => {
         <meta name="date" content="2024-12-28" />
         <meta name="last-modified" content="2024-12-28" />
         <meta name="expires" content="never" />
-        <meta name="abstract" content="A Place Called Home LLC is a licensed Type B Residential Care Facility for the Elderly providing senior care facility services in DeSoto, Texas. Our elderly care home offers 24/7 staff availability, professional care oversight, and medication support in a residential setting for up to 6 residents, serving the Dallas-Fort Worth (DFW) metropolitan area." />
+        <meta name="abstract" content="Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals for up to 6 residents." />
         
         <!-- Open Graph / Facebook -->
         <meta property="og:title" content="Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care" />
@@ -58,7 +58,7 @@ const seoPlugin = () => {
         <!-- Twitter -->
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care" />
-        <meta name="twitter:description" content="Licensed Residential Care Facility for the Elderly with 24/7 staff availability, professional care oversight, and home-cooked meals. Serving DeSoto and the DFW area." />
+        <meta name="twitter:description" content="Licensed Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals." />
         <meta name="twitter:site" content="@APCHAssisted" />
         <meta name="twitter:creator" content="@APCHAssisted" />
         
@@ -69,7 +69,7 @@ const seoPlugin = () => {
           "@type": ["LocalBusiness", "AssistedLiving", "SeniorLiving"],
           "name": "A Place Called Home LLC",
           "alternateName": ["APCH", "A Place Called Home Assisted Living", "DeSoto Senior Care Facility"],
-          "description": "Licensed Type B Residential Care Facility for the Elderly providing senior care facility services with 24/7 staff availability, professional care oversight, and medication support in DeSoto, TX",
+          "description": "Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals for up to 6 residents.",
           "@id": "https://www.apchllc.com/#localbusiness",
           "address": {
             "@type": "PostalAddress",
