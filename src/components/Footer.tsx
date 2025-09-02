@@ -105,7 +105,7 @@ export default function Footer() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm">
                 <Shield className="w-4 h-4 text-blue-400" />
-                <span className="text-slate-300">Licensed Type B Small</span>
+                <span className="text-slate-300">Licensed Type B</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Heart className="w-4 h-4 text-emerald-400" />
@@ -213,7 +213,7 @@ export default function Footer() {
             {/* Copyright */}
             <div className="text-slate-400 text-sm text-center lg:text-left">
               <p>&copy; {currentYear} A Place Called Home LLC. All rights reserved.</p>
-              <p className="mt-1">Licensed Type B Small Assisted Living in Texas</p>
+                              <p className="mt-1">Licensed Type B Assisted Living in Texas</p>
               <p className="mt-1 text-slate-500">
                 We provide assisted living services and coordinate with licensed healthcare providers. We do not provide nursing services or clinical care.
               </p>
@@ -237,7 +237,7 @@ export default function Footer() {
           <div className="mt-8 pt-6 border-t border-slate-800">
             <div className="text-center text-slate-500 text-xs max-w-4xl mx-auto">
               <p className="mb-2">
-                A Place Called Home LLC operates licensed Type B Small assisted living facilities 
+                A Place Called Home LLC operates licensed Type B assisted living facilities 
                 in compliance with Texas Health and Human Services regulations. We provide 
                 information only and do not offer medical, legal, or financial advice.
               </p>

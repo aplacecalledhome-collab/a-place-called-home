@@ -154,7 +154,7 @@ const seoPlugin = () => {
               "name": "What type of assisted living is A Place Called Home?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We are a licensed Type B small-home assisted living residence in DeSoto, TX, serving up to six residents with 24/7 care."
+                "text": "We are a licensed Type B assisted living residence in DeSoto, TX, serving up to six residents with 24/7 care."
               }
             },
             {

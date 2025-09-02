@@ -18,9 +18,9 @@ export default function Licensing() {
             <Shield className="w-5 h-5 text-blue-600" />
             <span className="text-slate-700 font-semibold">Licensing & Compliance</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Licensed Type B Small</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Licensed Type B</h2>
           <p className="text-lg text-slate-600 mt-4 max-w-3xl mx-auto">
-            We operate in compliance with Texas Health and Human Services requirements for Type B small
+                          We operate in compliance with Texas Health and Human Services requirements for Type B
             assisted living homes.
           </p>
         </motion.div>
@@ -35,7 +35,7 @@ export default function Licensing() {
             </CardHeader>
             <CardContent className="text-slate-700 leading-relaxed">
               <ul className="list-disc pl-5 space-y-2">
-                <li>Facility type: Type B Small Assisted Living</li>
+                <li>Facility type: Type B Assisted Living</li>
                 <li>Regulatory authority: Texas Health and Human Services (HHS)</li>
                 <li>Resident capacity: up to 6</li>
               </ul>

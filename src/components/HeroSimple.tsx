@@ -37,7 +37,7 @@ export default function HeroSimple() {
           <div className="mb-6 flex justify-center">
             <div className="flex items-center gap-2 glass-subtle px-6 py-3 rounded-full">
               <Shield className="w-5 h-5 text-blue-300" />
-              <span className="text-white font-semibold">Licensed Type B Small • Family Owned</span>
+              <span className="text-white font-semibold">Licensed Type B • Family Owned</span>
               <Home className="w-5 h-5 text-green-300" />
             </div>
           </div>
