@@ -2,10 +2,10 @@
   "buildCommand": "vite build",
   "outputDirectory": "build",
   "functions": {
-    "api/auth.ts": {
+    "api/auth.js": {
       "maxDuration": 10
     },
-    "api/health.ts": {
+    "api/health.js": {
       "maxDuration": 10
     }
   },
