@@ -95,25 +95,48 @@ export default function ScheduleTour() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     setError(null);
+
     try {
-      setIsSubmitting(true);
+      // Check if we have the required environment variable
       const apiBase = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL as string;
-      if (!apiBase) throw new Error('Missing VITE_SUPABASE_FUNCTIONS_URL');
-      const sitekey = import.meta.env.VITE_HCAPTCHA_SITEKEY as string | undefined;
-      let captchaToken: string | undefined;
-      if (sitekey) {
-        const { getHCaptchaToken } = await import("../utils/hcaptcha");
-        captchaToken = await getHCaptchaToken(sitekey);
+      if (!apiBase) {
+        throw new Error('Tour scheduling is not configured. Please contact support.');
       }
-      // include a hidden honeypot field as empty to deter bots
+
+      // Get hCaptcha token
+      let captchaToken: string | undefined;
+      const sitekey = import.meta.env.VITE_HCAPTCHA_SITEKEY as string | undefined;
+      if (sitekey) {
+        try {
+          const { getHCaptchaToken } = await import("../utils/hcaptcha");
+          captchaToken = await getHCaptchaToken(sitekey);
+        } catch (captchaError) {
+          console.warn('hCaptcha error:', captchaError);
+          // Continue without captcha if it fails
+        }
+      }
+
       await submitTourRequest(apiBase, { ...formData, website: '', captchaToken });
       setIsSubmitted(true);
-    } catch (err) {
-      console.error('Tour request failed:', err);
-      setError((err as Error)?.message || 'Sorry, we could not submit your request right now. Please try again.');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        preferredDate: '',
+        preferredTime: '',
+        numberOfVisitors: '',
+        relationship: '',
+        urgency: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Tour scheduling error:', error);
+      setError((error as Error)?.message || 'Failed to schedule tour. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
-    finally { setIsSubmitting(false); }
   };
 
   if (isSubmitted) {

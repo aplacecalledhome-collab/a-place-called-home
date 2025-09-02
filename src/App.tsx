@@ -6,6 +6,7 @@ import { Toaster } from "./components/ui/sonner";
 import { useSEO } from "./hooks/useSEO";
 import LazyLoaded from './components/LazyLoaded';
 import InViewLazy from './components/InViewLazy';
+import EnvironmentChecker from './components/EnvironmentChecker';
 
 const Services = lazy(() => import("./components/Services"));
 const CareAndSupport = lazy(() => import("./components/CareAndSupport"));
@@ -35,7 +36,7 @@ export default function App() {
         <Navigation />
         
         {/* Main Content - Adding scroll margin for sections */}
-        <main id="main-content" role="main" className="scroll-mt-20">
+        <main id="main-content" role="main" className="scroll-margin-top: 20">
           {/* Hero Section with Glass Morphism */}
           <Hero />
           
@@ -84,7 +85,8 @@ export default function App() {
           {/* Toast Notifications */}
           <Toaster />
 
-          {/* SEO tools removed per request */}
+          {/* Environment Checker for Development */}
+          <EnvironmentChecker />
         </LazyLoaded>
       </div>
     </ErrorBoundary>

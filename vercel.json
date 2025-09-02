@@ -1,10 +1,13 @@
 {
   "buildCommand": "vite build",
   "outputDirectory": "build",
+  "functions": {
+    "api/auth.ts": {
+      "maxDuration": 10
+    }
+  },
   "routes": [
-    { "src": "/api/auth", "dest": "/api/auth" },
-    { "src": "/(.*)", "has": [{ "type": "cookie", "key": "site_auth", "value": "1" }], "continue": true },
-    { "src": "/(.*)", "dest": "/api/auth?redirect=/$1", "status": 302 },
+    { "src": "/api/(.*)", "dest": "/api/$1" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]

@@ -1,41 +1,60 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-function unauthorized(res: VercelResponse) {
-  res.setHeader('WWW-Authenticate', 'Basic realm="Protected", charset="UTF-8"');
-  return res.status(401).send('Authentication required');
-}
-
 export default function handler(req: VercelRequest, res: VercelResponse) {
+  // Check if basic auth is configured
   const user = process.env.BASIC_AUTH_USER || '';
   const pass = process.env.BASIC_AUTH_PASS || '';
 
   if (!user || !pass) {
-    return res
-      .status(500)
-      .send('Basic auth not configured. Set BASIC_AUTH_USER and BASIC_AUTH_PASS env vars.');
+    // Instead of crashing, return a helpful message
+    return res.status(200).json({
+      message: 'Basic authentication not configured',
+      instructions: 'Set BASIC_AUTH_USER and BASIC_AUTH_PASS environment variables in Vercel to enable authentication',
+      status: 'disabled'
+    });
   }
 
+  // If auth is configured, proceed with authentication logic
   const authHeader = req.headers.authorization || '';
   const [scheme, encoded] = authHeader.split(' ');
+  
   if (scheme !== 'Basic' || !encoded) {
-    return unauthorized(res);
+    res.setHeader('WWW-Authenticate', 'Basic realm="Protected", charset="UTF-8"');
+    return res.status(401).json({
+      message: 'Authentication required',
+      status: 'unauthorized'
+    });
   }
 
   let credentials = '';
   try {
     credentials = Buffer.from(encoded, 'base64').toString('utf8');
   } catch {
-    return unauthorized(res);
+    return res.status(400).json({
+      message: 'Invalid authorization header format',
+      status: 'error'
+    });
   }
 
   const sepIndex = credentials.indexOf(':');
+  if (sepIndex === -1) {
+    return res.status(400).json({
+      message: 'Invalid credentials format',
+      status: 'error'
+    });
+  }
+
   const providedUser = credentials.slice(0, sepIndex);
   const providedPass = credentials.slice(sepIndex + 1);
 
   if (providedUser !== user || providedPass !== pass) {
-    return unauthorized(res);
+    return res.status(401).json({
+      message: 'Invalid credentials',
+      status: 'unauthorized'
+    });
   }
 
+  // Authentication successful
   const redirectParam = Array.isArray(req.query.redirect)
     ? req.query.redirect[0]
     : (req.query.redirect as string) || '/';
