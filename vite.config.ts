@@ -9,7 +9,7 @@ const seoPlugin = () => {
     transformIndexHtml(html: string) {
       const seoMetaTags = `
         <title>Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care | A Place Called Home</title>
-        <meta name="description" content="Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving Dallas-Fort Worth (DFW). Senior care facility with 24/7 staff, medication support, and home-cooked meals. Elderly care home for up to 6 residents." />
+        <meta name="description" content="Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals for up to 6 residents." />
         <meta name="keywords" content="assisted living facility, senior care facility, elderly facility, care home, residential care facility for the elderly, assisted living DeSoto TX, assisted living Dallas, assisted living Fort Worth, assisted living DFW, Dallas County assisted living, small assisted living home, Type B assisted living, respite care DeSoto, medication support assisted living, 24/7 staff DeSoto, six-bed assisted living, home-style assisted living Texas, senior living DeSoto, elder care DeSoto, nursing home alternative DeSoto, memory care DeSoto, independent living DeSoto, senior housing DeSoto, assisted living near me DeSoto, senior care near me Dallas, elderly care facility DFW, residential care for elderly Dallas County" />
         <meta name="author" content="A Place Called Home LLC" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -41,7 +41,7 @@ const seoPlugin = () => {
         
         <!-- Open Graph / Facebook -->
         <meta property="og:title" content="Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care" />
-        <meta property="og:description" content="Licensed Residential Care Facility for the Elderly with 24/7 staff availability, professional care oversight, and home-cooked meals in DeSoto, serving Dallas-Fort Worth (DFW) area." />
+        <meta property="og:description" content="Licensed Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals." />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="A Place Called Home LLC" />
         <meta property="og:locale" content="en_US" />

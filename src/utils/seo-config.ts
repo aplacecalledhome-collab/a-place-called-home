@@ -2,7 +2,7 @@
 export const SEO_CONFIG = {
   title: "Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care | A Place Called Home",
   metaTags: [
-    { name: 'description', content: 'Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving Dallas-Fort Worth (DFW). Senior care facility with 24/7 staff, medication support, and home-cooked meals. Elderly care home for up to 6 residents.' },
+    { name: 'description', content: 'Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals for up to 6 residents.' },
     { name: 'keywords', content: 'assisted living facility, senior care facility, elderly facility, care home, residential care facility for the elderly, assisted living DeSoto TX, assisted living Dallas, assisted living Fort Worth, assisted living DFW, Dallas County assisted living, small assisted living home, Type B assisted living, respite care DeSoto, medication support assisted living, 24/7 staff DeSoto, six-bed assisted living, home-style assisted living Texas, senior living DeSoto, elder care DeSoto, nursing home alternative DeSoto, memory care DeSoto, independent living DeSoto, senior housing DeSoto, assisted living near me DeSoto, senior care near me Dallas, elderly care facility DFW, residential care for elderly Dallas County' },
     { name: 'author', content: 'A Place Called Home LLC' },
     { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
@@ -35,11 +35,11 @@ export const SEO_CONFIG = {
     { name: 'date', content: '2024-12-28' },
     { name: 'last-modified', content: '2024-12-28' },
     { name: 'expires', content: 'never' },
-    { name: 'abstract', content: 'A Place Called Home LLC is a licensed Type B Residential Care Facility for the Elderly providing senior care facility services in DeSoto, Texas. Our elderly care home offers 24/7 staff availability, professional care oversight, and medication support in a residential setting for up to 6 residents, serving the Dallas-Fort Worth (DFW) metropolitan area.' }
+    { name: 'abstract', content: 'Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals for up to 6 residents.' }
   ],
   socialTags: [
     { property: 'og:title', content: 'Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care' },
-    { property: 'og:description', content: 'Licensed Residential Care Facility for the Elderly with 24/7 staff availability, professional care oversight, and home-cooked meals in DeSoto, serving Dallas-Fort Worth (DFW) area.' },
+    { property: 'og:description', content: 'Licensed Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals.' },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'A Place Called Home LLC' },
     { property: 'og:locale', content: 'en_US' },
@@ -54,7 +54,7 @@ export const SEO_CONFIG = {
     { property: 'og:email', content: 'support@apchllc.com' },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care' },
-    { name: 'twitter:description', content: 'Licensed Residential Care Facility for the Elderly with 24/7 staff availability, professional care oversight, and home-cooked meals. Serving DeSoto and the DFW area.' },
+    { name: 'twitter:description', content: 'Licensed Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals.' },
     { name: 'twitter:site', content: '@APCHAssisted' },
     { name: 'twitter:creator', content: '@APCHAssisted' }
   ]
@@ -65,7 +65,7 @@ export const createStructuredData = (currentUrl: string) => ({
   "@type": ["LocalBusiness", "AssistedLiving", "SeniorLiving"],
   "name": "A Place Called Home LLC",
   "alternateName": ["APCH", "A Place Called Home Assisted Living", "DeSoto Senior Care Facility"],
-  "description": "Licensed Type B Residential Care Facility for the Elderly providing senior care facility services with 24/7 staff availability, professional care oversight, and medication support in DeSoto, TX",
+  "description": "Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals for up to 6 residents.",
   "@id": currentUrl.split('#')[0] + "#localbusiness",
   "address": {
     "@type": "PostalAddress",
