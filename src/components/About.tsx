@@ -36,10 +36,10 @@ export default function About() {
             <CardContent className="text-slate-700 leading-relaxed">
               <p>
                 Welcome to A Place Called Home. We created this home to offer a safe, loving
-                environment where each resident is known personally and cared for like family.
+                environment where each resident is known personally and receives care like family.
               </p>
               <p className="mt-3">
-                We believe small-home living delivers better attention, relationships, and peace of mind.
+                We believe small-home living provides better attention, relationships, and peace of mind.
                 Please reach out—we’d be honored to support your family.
               </p>
             </CardContent>

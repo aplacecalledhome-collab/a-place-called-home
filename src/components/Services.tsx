@@ -23,7 +23,7 @@ export default function Services() {
     {
       icon: Clock,
       title: "24/7 Caregiver Support",
-      description: "Compassionate caregivers available around the clock with awake overnight staff",
+      description: "Compassionate caregivers available around the clock, including awake overnight staff",
       features: ["Personal care assistance", "Emergency response", "Safety monitoring", "Comfort and companionship"]
     },
     {
@@ -41,7 +41,7 @@ export default function Services() {
     {
       icon: Heart,
       title: "ADL Support",
-      description: "Assistance with Activities of Daily Living to maintain dignity and independence",
+      description: "Assistance with daily activities like bathing, dressing, and grooming to maintain dignity and independence",
       features: ["Bathing assistance", "Dressing support", "Grooming help", "Mobility assistance"]
     },
     {
@@ -53,7 +53,7 @@ export default function Services() {
     {
       icon: Sparkles,
       title: "Housekeeping & Laundry",
-      description: "Maintaining clean, comfortable living spaces and fresh linens",
+      description: "Clean, comfortable living spaces and fresh linens",
       features: ["Daily housekeeping", "Laundry service", "Linen changes", "Personal care items"]
     },
     {
@@ -84,7 +84,7 @@ export default function Services() {
     {
       icon: Phone,
       title: "Healthcare Coordination",
-      description: "Working with physicians, home health, hospice, and specialists"
+      description: "Coordination with physicians, home health, hospice, and specialists"
     }
   ];
 

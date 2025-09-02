@@ -60,7 +60,7 @@ export default function ScheduleTour() {
   }, [isSubmitted]);
 
   const tourTypes = [
-    { value: 'in-person', label: 'In-Person Tour', icon: Home, description: 'Visit our home and meet our team' },
+    { value: 'in-person', label: 'In-Person Tour', icon: Home, description: 'Visit our home and meet our care team' },
     { value: 'virtual', label: 'Virtual Tour', icon: Video, description: 'Online video tour from your home' }
   ];
 

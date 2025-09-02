@@ -128,7 +128,7 @@ export default function Hero() {
 
           {/* Trust indicators */}
           <div className="hidden lg:block mt-10 pt-6 border-t border-white/20">
-            <p className="text-white/70 text-sm mb-4">Serving families across Dallas County</p>
+            <p className="text-white/70 text-sm mb-4">Serving families throughout Dallas County</p>
             <div className="flex justify-center items-center gap-8 flex-wrap">
               <div className="text-center">
                 <div className="text-3xl font-bold text-white">1</div>

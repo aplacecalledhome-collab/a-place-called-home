@@ -243,7 +243,7 @@ export default function Footer() {
               </p>
               <p>
                 Emergency contact available 24/7 for residents and families. 
-                For licensing verification, visit the Texas HHS website or call our facilities directly.
+                For licensing verification, visit the Texas HHS website or contact us directly.
               </p>
             </div>
           </div>
