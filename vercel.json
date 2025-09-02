@@ -4,6 +4,9 @@
   "functions": {
     "api/auth.ts": {
       "maxDuration": 10
+    },
+    "api/health.ts": {
+      "maxDuration": 10
     }
   },
   "routes": [
