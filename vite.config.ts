@@ -8,6 +8,16 @@ const seoPlugin = () => {
     name: 'seo-meta-tags',
     transformIndexHtml(html: string) {
       const seoMetaTags = `
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3NJWQ7N7ZB"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-3NJWQ7N7ZB');
+        </script>
+        
         <title>Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care | A Place Called Home</title>
         <meta name="description" content="Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving the DFW area. 24/7 care, medication support, and home-cooked meals for up to 6 residents." />
         <meta name="keywords" content="assisted living facility, senior care facility, elderly facility, care home, residential care facility for the elderly, assisted living DeSoto TX, assisted living Dallas, assisted living Fort Worth, assisted living DFW, Dallas County assisted living, small assisted living home, Type B assisted living, respite care DeSoto, medication support assisted living, 24/7 staff DeSoto, six-bed assisted living, home-style assisted living Texas, senior living DeSoto, elder care DeSoto, nursing home alternative DeSoto, memory care DeSoto, independent living DeSoto, senior housing DeSoto, assisted living near me DeSoto, senior care near me Dallas, elderly care facility DFW, residential care for elderly Dallas County" />
