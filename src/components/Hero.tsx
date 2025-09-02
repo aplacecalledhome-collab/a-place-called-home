@@ -81,18 +81,6 @@ export default function Hero() {
             Small-Home Assisted Living in DeSoto, TX
           </p>
 
-          {/* SEO-Optimized Content for Target Keywords */}
-          <div className="mb-6 text-center">
-            <p className="text-lg text-white/90 mb-3">
-              <strong>Residential Care Facility for the Elderly</strong> serving the Dallas-Fort Worth (DFW) area
-            </p>
-            <p className="text-base text-white/80 max-w-3xl mx-auto">
-              Our <strong>senior care facility</strong> provides <strong>elderly care</strong> in a warm, 
-              home-like environment. As a licensed <strong>assisted living facility</strong> in DeSoto, 
-              we offer personalized <strong>care home</strong> services with 24/7 staff availability.
-            </p>
-          </div>
-
           {/* Shorter copy to keep hero less text-heavy */}
           
 
