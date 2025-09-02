@@ -28,36 +28,29 @@ export default function Navigation() {
   };
 
   const handleCallNow = () => {
-    window.location.href = 'tel:(469) 555-APCH';
+    window.location.href = 'tel:5109390657';
   };
 
-  const mainNavItems = [
+  const mainNavItems: { label: string; href: string; dropdown?: { label: string; href: string }[] }[] = [
     { label: 'Home', href: '#home' },
     { label: 'Services', href: '#services' },
-    { 
-      label: 'Locations', 
-      href: '#locations',
-      dropdown: [
-        { label: 'DeSoto - Shenandoah', href: '#location-desoto' },
-        { label: 'Lancaster - Cedarbrook', href: '#location-lancaster' }
-      ]
-    },
-    { label: 'Medical Care', href: '#medical-care' },
+    { label: 'Care & Support', href: '#care-and-support' },
     { label: 'Financial Assistance', href: '#financial' },
     { label: 'Licensing', href: '#licensing' },
     { label: 'About', href: '#about' },
-    { label: 'Testimonials', href: '#testimonials' },
-    { label: 'Gallery', href: '#gallery' }
+    { label: 'Contact', href: '#contact' }
   ];
 
   const ctaItems = [
     { label: 'Schedule a Tour', href: '#schedule-tour', primary: true },
     { label: 'Contact', href: '#contact' },
-    { label: 'Refer to Us', href: '#refer' }
+    { label: 'Refer to Us', href: '#contact' }
   ];
 
   return (
     <motion.nav
+      role="navigation"
+      aria-label="Primary"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -76,8 +69,31 @@ export default function Navigation() {
             transition={{ delay: 0.2 }}
             className="flex items-center"
           >
-            <Logo size="md" />
+            <Logo size="md" className="w-32 h-32" />
           </motion.div>
+
+          {/* Center Brand (mobile only) */}
+          <div className="lg:hidden flex-1 text-center">
+            <button
+              onClick={() => scrollToSection('#home')}
+              className="text-[1.65rem] font-semibold focus:outline-none leading-tight"
+              aria-label="Go to Home"
+            >
+              <span
+                className={
+                  isScrolled
+                    ? 'text-transparent bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text drop-shadow-sm'
+                    : 'text-white'
+                }
+              >
+                A Place Called
+              </span>
+              {" "}
+              <span className="text-transparent bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text drop-shadow-sm">
+                Home
+              </span>
+            </button>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">
@@ -107,7 +123,7 @@ export default function Navigation() {
                         exit={{ opacity: 0, y: 10 }}
                         className="absolute top-full left-0 mt-2 w-64 glass-strong rounded-lg shadow-xl border border-white/20 overflow-hidden"
                       >
-                        {item.dropdown.map((dropdownItem) => (
+                        {item.dropdown.map((dropdownItem: { label: string; href: string }) => (
                           <button
                             key={dropdownItem.label}
                             onClick={() => scrollToSection(dropdownItem.href)}
@@ -145,13 +161,11 @@ export default function Navigation() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <Button
-                onClick={handleCallNow}
-                size="sm"
-                className="glass-button font-semibold"
-              >
-                <Phone className="w-4 h-4 mr-2" />
-                Call Now
+              <Button size="sm" className="glass-button font-semibold" asChild>
+                <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                  <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
+                  Call Now
+                </a>
               </Button>
             </motion.div>
             
@@ -170,7 +184,7 @@ export default function Navigation() {
                     : 'glass-button-outline font-semibold'
                 }`}
               >
-                <Calendar className="w-4 h-4 mr-2" />
+                <Calendar className="w-4 h-4 mr-2" aria-hidden="true" />
                 Schedule Tour
               </Button>
             </motion.div>
@@ -183,16 +197,18 @@ export default function Navigation() {
                 <Button
                   variant="ghost"
                   size="sm"
+                  aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                  aria-expanded={isOpen}
                   className={`${isScrolled ? 'text-slate-800' : 'text-white'}`}
                 >
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-6 h-6" aria-hidden="true" />
                 </Button>
               </SheetTrigger>
               <SheetContent className="glass-strong border-l border-white/20 w-80">
                 <div className="flex flex-col gap-6 mt-8">
                   {/* Mobile Logo */}
                   <div className="flex justify-center mb-6">
-                    <Logo size="lg" />
+                    <Logo size="lg" className="w-40 h-40" />
                   </div>
 
                   {/* Separator */}
@@ -200,27 +216,27 @@ export default function Navigation() {
 
                   {/* Mobile Primary CTAs */}
                   <div className="flex flex-col gap-3">
-                    <Button
-                      onClick={handleCallNow}
-                      size="lg"
-                      className="glass-button justify-start"
-                    >
-                      <Phone className="w-5 h-5 mr-3" />
-                      Call Now: (469) 555-APCH
+                    <Button size="lg" className="glass-button justify-start" asChild>
+                      <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                        <Phone className="w-5 h-5 mr-3" aria-hidden="true" />
+                        Call Now: (510) 939-0657
+                      </a>
                     </Button>
                     <Button
                       onClick={() => scrollToSection('#schedule-tour')}
                       size="lg"
                       className="glass-button-outline justify-start"
                     >
-                      <Calendar className="w-5 h-5 mr-3" />
+                      <Calendar className="w-5 h-5 mr-3" aria-hidden="true" />
                       Schedule a Tour
                     </Button>
                   </div>
 
                   {/* Mobile Navigation Links */}
                   <div className="flex flex-col">
-                    {[...mainNavItems, ...ctaItems].map((item) => (
+                    {(() => {
+                      const mobileLinks = [...mainNavItems, ...ctaItems.filter((i) => i.label === 'Refer to Us')];
+                      return mobileLinks.map((item) => (
                       <button
                         key={item.label}
                         onClick={() => scrollToSection(item.href)}
@@ -228,7 +244,8 @@ export default function Navigation() {
                       >
                         {item.label}
                       </button>
-                    ))}
+                      ));
+                    })()}
                   </div>
                 </div>
               </SheetContent>

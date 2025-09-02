@@ -95,10 +95,10 @@ export default function Services() {
     }
   };
 
-  const scrollToMedicalCare = () => {
-    const medicalSection = document.querySelector('#medical-care');
-    if (medicalSection) {
-      medicalSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const scrollToCareSupport = () => {
+    const section = document.querySelector('#care-and-support');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -204,15 +204,15 @@ export default function Services() {
                     className="flex items-center gap-3"
                   >
                     <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Heart className="w-3 h-3 text-white" />
+                      <Heart className="w-3 h-3 text-white" aria-hidden="true" />
                     </div>
                     <span className="text-slate-700 font-medium">{item}</span>
                   </motion.div>
                 ))}
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button onClick={scrollToMedicalCare} className="glass-button">
-                  Learn About Medical Care
+                <Button onClick={scrollToCareSupport} className="glass-button">
+                  Learn About Care & Support
                 </Button>
                 <Button onClick={scrollToTour} variant="outline" className="border-slate-300">
                   Schedule a Tour
@@ -227,8 +227,10 @@ export default function Services() {
                 className="rounded-xl shadow-2xl w-full h-80 object-cover"
                 loading="lazy"
                 decoding="async"
-                fetchpriority="low"
+                fetchPriority="low"
                 sizes="(min-width: 1024px) 50vw, 100vw"
+                width={1280}
+                height={720}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
             </div>
@@ -282,10 +284,93 @@ export default function Services() {
               <Calendar className="w-5 h-5 mr-3" />
               Schedule a Tour
             </Button>
-            <Button onClick={() => window.location.href = 'tel:(469) 555-APCH'} size="lg" variant="outline" className="border-slate-300">
-              <Phone className="w-5 h-5 mr-3" />
-              Call (469) 555-APCH
+            <Button size="lg" variant="outline" className="border-slate-300" asChild>
+              <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                <Phone className="w-5 h-5 mr-3" aria-hidden="true" />
+                Call (510) 939-0657
+              </a>
             </Button>
+          </div>
+        </motion.div>
+
+        {/* SEO-Optimized Content Section for Target Keywords */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-8 md:p-12 border border-slate-200"
+        >
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-8">
+              Residential Care Facility for the Elderly in DeSoto, TX
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 className="text-xl font-semibold text-slate-800 mb-4">
+                  Senior Care Facility Serving DFW Area
+                </h4>
+                <p className="text-slate-700 mb-4">
+                  Our <strong>senior care facility</strong> in DeSoto provides comprehensive <strong>elderly care</strong> 
+                  services to residents throughout the Dallas-Fort Worth metropolitan area. As a licensed 
+                  <strong>assisted living facility</strong>, we offer a unique alternative to traditional nursing homes.
+                </p>
+                <p className="text-slate-700">
+                  Located in DeSoto, TX, our <strong>care home</strong> serves families from Dallas, Cedar Hill, 
+                  Duncanville, Lancaster, and surrounding communities within a 25-mile radius.
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-xl font-semibold text-slate-800 mb-4">
+                  What Makes Our Elderly Care Different?
+                </h4>
+                <ul className="space-y-2 text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500 font-bold">•</span>
+                    <strong>Residential Care Facility for the Elderly</strong> - Licensed Type B care
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500 font-bold">•</span>
+                    Small-home environment with maximum 6 residents
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500 font-bold">•</span>
+                    24/7 staff availability and medication support
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-500 font-bold">•</span>
+                    Home-cooked meals and personalized care plans
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl p-6 border border-slate-200">
+              <h4 className="text-lg font-semibold text-slate-800 mb-4 text-center">
+                Areas We Serve: Assisted Living Near Me
+              </h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                {[
+                  "DeSoto, TX",
+                  "Dallas, TX", 
+                  "Cedar Hill, TX",
+                  "Duncanville, TX",
+                  "Lancaster, TX",
+                  "Red Oak, TX",
+                  "Midlothian, TX",
+                  "Waxahachie, TX"
+                ].map((city, index) => (
+                  <div key={index} className="text-center p-2 bg-slate-50 rounded-lg">
+                    <span className="text-slate-700 font-medium">{city}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-center text-slate-600 mt-4 text-sm">
+                Serving Dallas County and surrounding areas within 25 miles
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>

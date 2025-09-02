@@ -210,6 +210,15 @@
   }
 }
 
+/* Reduce animations for users who prefer less motion (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer base {
   *, :after, :before, ::backdrop {
     box-sizing: border-box;

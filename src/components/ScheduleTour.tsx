@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -22,9 +22,9 @@ import {
 } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { submitTourRequest } from "../utils/api";
-import { getHCaptchaToken } from "../utils/hcaptcha";
 
 export default function ScheduleTour() {
+  const successRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -43,6 +43,21 @@ export default function ScheduleTour() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // After successful submit, move focus to the success card and ensure it's in view
+  useEffect(() => {
+    if (isSubmitted) {
+      // Keep the anchor in the URL for consistent back/forward behavior
+      if (location.hash !== '#schedule-tour') {
+        history.replaceState(null, '', '#schedule-tour');
+      }
+      successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Allow scroll to finish before focusing for better UX
+      setTimeout(() => successRef.current?.focus(), 250);
+    }
+  }, [isSubmitted]);
 
   const tourTypes = [
     { value: 'in-person', label: 'In-Person Tour', icon: Home, description: 'Visit our home and meet our team' },
@@ -50,15 +65,29 @@ export default function ScheduleTour() {
   ];
 
   const locations = [
-    { value: 'desoto', label: 'DeSoto - Shenandoah', address: '521 Shenandoah Dr, DeSoto, TX 75115' },
-    { value: 'lancaster', label: 'Lancaster - Cedarbrook', address: '1237 Cedarbrook Trail, Lancaster, TX 75146' },
-    { value: 'both', label: 'Both Locations', address: 'Tour both homes in one visit' }
+    { value: 'desoto', label: 'DeSoto - Shennandoah', address: '521 Shennandoah Dr, DeSoto, TX 75115' }
   ];
 
+  // If there is only one location, preselect it so users don't need to open a dropdown.
+  useEffect(() => {
+    if (locations.length === 1 && formData.location !== locations[0].value) {
+      setFormData((prev) => ({ ...prev, location: locations[0].value }));
+    }
+  }, []);
+
   const timeSlots = [
-    '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', 
-    '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'
+    '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
+    '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'
   ];
+
+  // Compute local ISO date (YYYY-MM-DD) without timezone issues
+  const toLocalISODate = (d: Date) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+  };
+  const minTourDate = toLocalISODate(new Date(Date.now() + 3 * 24 * 60 * 60 * 1000));
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -66,26 +95,31 @@ export default function ScheduleTour() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     try {
+      setIsSubmitting(true);
       const apiBase = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL as string;
       if (!apiBase) throw new Error('Missing VITE_SUPABASE_FUNCTIONS_URL');
       const sitekey = import.meta.env.VITE_HCAPTCHA_SITEKEY as string | undefined;
       let captchaToken: string | undefined;
       if (sitekey) {
+        const { getHCaptchaToken } = await import("../utils/hcaptcha");
         captchaToken = await getHCaptchaToken(sitekey);
       }
-      await submitTourRequest(apiBase, { ...formData, captchaToken });
+      // include a hidden honeypot field as empty to deter bots
+      await submitTourRequest(apiBase, { ...formData, website: '', captchaToken });
       setIsSubmitted(true);
     } catch (err) {
       console.error('Tour request failed:', err);
-      alert('Sorry, we could not submit your request right now. Please try again.');
+      setError((err as Error)?.message || 'Sorry, we could not submit your request right now. Please try again.');
     }
+    finally { setIsSubmitting(false); }
   };
 
   if (isSubmitted) {
     return (
       <section id="schedule-tour" className="py-20 bg-gradient-to-br from-emerald-50 to-blue-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div ref={successRef} tabIndex={-1} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" aria-live="polite">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -107,9 +141,11 @@ export default function ScheduleTour() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={() => window.location.href = 'tel:(469) 555-APCH'} className="glass-button">
-                <Phone className="w-5 h-5 mr-3" />
-                Call Us: (469) 555-APCH
+              <Button className="glass-button" asChild>
+                <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                  <Phone className="w-5 h-5 mr-3" />
+                  Call Us: (510) 939-0657
+                </a>
               </Button>
               <Button onClick={() => setIsSubmitted(false)} variant="outline" className="border-slate-300">
                 Schedule Another Tour
@@ -149,8 +185,10 @@ export default function ScheduleTour() {
             </span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Choose a date and time that works for you. You'll receive a confirmation and reminders. 
-            Please let us know any mobility or dietary needs for your visit.
+            Choose a date and time that works for you. You'll receive a confirmation and reminders.
+          </p>
+          <p className="text-sm text-slate-500 max-w-2xl mx-auto mt-2">
+            Please do not include medical details in this form. We can discuss care needs privately by phone.
           </p>
           
           {/* Special Offer */}
@@ -209,9 +247,9 @@ export default function ScheduleTour() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="email">Email *</Label>
+                      <Label htmlFor="tour-email">Email *</Label>
                       <Input
-                        id="email"
+                        id="tour-email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
@@ -220,9 +258,9 @@ export default function ScheduleTour() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Phone *</Label>
+                      <Label htmlFor="tour-phone">Phone *</Label>
                       <Input
-                        id="phone"
+                        id="tour-phone"
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -259,21 +297,28 @@ export default function ScheduleTour() {
                   {/* Location Selection */}
                   <div>
                     <Label htmlFor="location">Location *</Label>
-                    <Select value={formData.location} onValueChange={(value) => handleInputChange('location', value)}>
-                      <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Choose location to visit" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {locations.map((location) => (
-                          <SelectItem key={location.value} value={location.value}>
-                            <div>
-                              <div className="font-medium">{location.label}</div>
-                              <div className="text-sm text-slate-600">{location.address}</div>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    {locations.length === 1 ? (
+                      <div className="mt-1 border rounded-md px-3 py-2 bg-slate-50 text-slate-700">
+                        <div className="font-medium">{locations[0].label}</div>
+                        <div className="text-sm text-slate-600">{locations[0].address}</div>
+                      </div>
+                    ) : (
+                      <Select value={formData.location} onValueChange={(value) => handleInputChange('location', value)}>
+                        <SelectTrigger className="mt-1">
+                          <SelectValue placeholder="Choose location to visit" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {locations.map((location) => (
+                            <SelectItem key={location.value} value={location.value}>
+                              <div>
+                                <div className="font-medium">{location.label}</div>
+                                <div className="text-sm text-slate-600">{location.address}</div>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
                   </div>
 
                   {/* Date and Time */}
@@ -285,7 +330,7 @@ export default function ScheduleTour() {
                         type="date"
                         value={formData.preferredDate}
                         onChange={(e) => handleInputChange('preferredDate', e.target.value)}
-                        min={new Date().toISOString().split('T')[0]}
+                        min={minTourDate}
                         required
                         className="mt-1"
                       />
@@ -341,12 +386,12 @@ export default function ScheduleTour() {
                   </div>
 
                   <div>
-                    <Label htmlFor="specialNeeds">Special accommodations needed for tour visit?</Label>
+                    <Label htmlFor="specialNeeds">Accessibility or visit notes (optional)</Label>
                     <Textarea
                       id="specialNeeds"
                       value={formData.specialNeeds}
                       onChange={(e) => handleInputChange('specialNeeds', e.target.value)}
-                      placeholder="Wheelchair access, dietary needs, etc."
+                      placeholder="Parking, gate code, or accessibility notes (no medical details)."
                       className="mt-1"
                       rows={3}
                     />
@@ -365,9 +410,14 @@ export default function ScheduleTour() {
                     </Label>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full glass-button">
+                  {error && (
+                    <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
+                      {error}
+                    </div>
+                  )}
+                  <Button type="submit" size="lg" disabled={isSubmitting} className="w-full glass-button">
                     <Calendar className="w-5 h-5 mr-3" />
-                    Schedule My Tour
+                    {isSubmitting ? 'Submitting…' : 'Schedule My Tour'}
                   </Button>
                 </form>
               </CardContent>
@@ -392,7 +442,7 @@ export default function ScheduleTour() {
               </CardHeader>
               <CardContent className="space-y-4">
                 {[
-                  "Meet our caring team and RN",
+                  "Meet our caring team",
                   "See bedrooms and common areas",
                   "Experience our home-like atmosphere",
                   "Discuss care needs and services",
@@ -409,18 +459,7 @@ export default function ScheduleTour() {
               </CardContent>
             </Card>
 
-            {/* Tour Image */}
-            <div className="relative">
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0b3VyJTIwYXNzaXN0ZWQlMjBsaXZpbmclMjBob21lfGVufDF8fHx8MTczNTM5NjkxMnww&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Tour of comfortable assisted living home"
-                className="rounded-xl shadow-xl w-full h-64 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-xl"></div>
-              <div className="absolute bottom-4 left-4 right-4">
-                <p className="text-white font-semibold text-lg">See why families choose our homes</p>
-              </div>
-            </div>
+            {/* Testimonials/Promo image removed by request until content is ready */}
 
             {/* Contact Info */}
             <Card className="glass-subtle border-0">
@@ -430,7 +469,7 @@ export default function ScheduleTour() {
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-blue-600" />
                     <div>
-                      <p className="font-medium text-slate-900">(469) 555-APCH</p>
+                      <p className="font-medium text-slate-900">(510) 939-0657</p>
                       <p className="text-sm text-slate-600">Call us directly to schedule</p>
                     </div>
                   </div>

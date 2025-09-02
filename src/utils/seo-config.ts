@@ -1,9 +1,9 @@
 // SEO Configuration and Data
 export const SEO_CONFIG = {
-  title: "A Place Called Home — Assisted Living in DeSoto, TX",
+  title: "Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care | A Place Called Home",
   metaTags: [
-    { name: 'description', content: 'Licensed Type B small-home assisted living in DeSoto, TX. 24/7 care, RN oversight, medication management, and home-cooked meals for up to 6 residents.' },
-    { name: 'keywords', content: 'assisted living DeSoto TX, small Type B assisted living, residential care home DeSoto, respite care DeSoto, medication management assisted living, 24-hour care DeSoto, six-bed assisted living, home-style assisted living Texas, assisted living Dallas County, senior care DeSoto, elderly care DeSoto, assisted living near me, small assisted living home, memory care DeSoto' },
+    { name: 'description', content: 'Licensed Type B Residential Care Facility for the Elderly in DeSoto, TX serving Dallas-Fort Worth (DFW). Senior care facility with 24/7 staff, medication support, and home-cooked meals. Elderly care home for up to 6 residents.' },
+    { name: 'keywords', content: 'assisted living facility, senior care facility, elderly facility, care home, residential care facility for the elderly, assisted living DeSoto TX, assisted living Dallas, assisted living Fort Worth, assisted living DFW, Dallas County assisted living, small assisted living home, Type B assisted living, respite care DeSoto, medication support assisted living, 24/7 staff DeSoto, six-bed assisted living, home-style assisted living Texas, senior living DeSoto, elder care DeSoto, nursing home alternative DeSoto, memory care DeSoto, independent living DeSoto, senior housing DeSoto, assisted living near me DeSoto, senior care near me Dallas, elderly care facility DFW, residential care for elderly Dallas County' },
     { name: 'author', content: 'A Place Called Home LLC' },
     { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
     { name: 'language', content: 'en-US' },
@@ -18,7 +18,7 @@ export const SEO_CONFIG = {
     { name: 'apple-mobile-web-app-capable', content: 'yes' },
     { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
     { name: 'mobile-web-app-capable', content: 'yes' },
-    { name: 'msapplication-tooltip', content: 'Small-Home Assisted Living in DeSoto, TX' },
+    { name: 'msapplication-tooltip', content: 'Residential Care Facility for the Elderly in DeSoto, TX - Small-Home Assisted Living' },
     { name: 'rating', content: 'general' },
     { name: 'revisit-after', content: '7 days' },
     { name: 'google', content: 'notranslate' },
@@ -28,18 +28,18 @@ export const SEO_CONFIG = {
     { name: 'yandex-verification', content: 'YOUR_CODE_HERE' },
     { name: 'norton-safeweb-site-verification', content: 'YOUR_CODE_HERE' },
     { name: 'classification', content: 'business' },
-    { name: 'subject', content: 'Small-Home Assisted Living Services' },
-    { name: 'reply-to', content: 'info@apchllc.com' },
+    { name: 'subject', content: 'Residential Care Facility for the Elderly - Small-Home Assisted Living Services' },
+    { name: 'reply-to', content: 'support@apchllc.com' },
     { name: 'owner', content: 'A Place Called Home LLC' },
     { name: 'copyright', content: 'Copyright 2024 A Place Called Home LLC. All rights reserved.' },
     { name: 'date', content: '2024-12-28' },
     { name: 'last-modified', content: '2024-12-28' },
     { name: 'expires', content: 'never' },
-    { name: 'abstract', content: 'A Place Called Home LLC provides licensed Type B small-home assisted living services in DeSoto, Texas, offering 24/7 care, RN oversight, and medication management in a residential setting for up to 6 residents.' }
+    { name: 'abstract', content: 'A Place Called Home LLC is a licensed Type B Residential Care Facility for the Elderly providing senior care facility services in DeSoto, Texas. Our elderly care home offers 24/7 staff availability, professional care oversight, and medication support in a residential setting for up to 6 residents, serving the Dallas-Fort Worth (DFW) metropolitan area.' }
   ],
   socialTags: [
-    { property: 'og:title', content: 'A Place Called Home LLC - Small-Home Assisted Living in DeSoto, TX' },
-    { property: 'og:description', content: 'Licensed Type B small-home assisted living with 24/7 care, RN oversight, and home-cooked meals in DeSoto, TX.' },
+    { property: 'og:title', content: 'Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care' },
+    { property: 'og:description', content: 'Licensed Residential Care Facility for the Elderly with 24/7 staff availability, professional care oversight, and home-cooked meals in DeSoto, serving Dallas-Fort Worth (DFW) area.' },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'A Place Called Home LLC' },
     { property: 'og:locale', content: 'en_US' },
@@ -47,14 +47,14 @@ export const SEO_CONFIG = {
     { property: 'og:region', content: 'TX' },
     { property: 'og:locality', content: 'DeSoto' },
     { property: 'og:postal-code', content: '75115' },
-    { property: 'og:street-address', content: '521 Shenandoah Dr' },
+    { property: 'og:street-address', content: '521 Shennandoah Dr' },
     { property: 'og:latitude', content: '32.5896' },
     { property: 'og:longitude', content: '-96.8570' },
-    { property: 'og:phone_number', content: '(469) 555-APCH' },
-    { property: 'og:email', content: 'info@apchllc.com' },
+    { property: 'og:phone_number', content: '(510) 939-0657' },
+    { property: 'og:email', content: 'support@apchllc.com' },
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: 'A Place Called Home LLC - Small-Home Assisted Living in DeSoto, TX' },
-    { name: 'twitter:description', content: 'Licensed Type B small-home assisted living with 24/7 care, RN oversight, and home-cooked meals in DeSoto, TX.' },
+    { name: 'twitter:title', content: 'Assisted Living Facility & Senior Care Home in DeSoto, TX | DFW Elderly Care' },
+    { name: 'twitter:description', content: 'Licensed Residential Care Facility for the Elderly with 24/7 staff availability, professional care oversight, and home-cooked meals. Serving DeSoto and the DFW area.' },
     { name: 'twitter:site', content: '@APCHAssisted' },
     { name: 'twitter:creator', content: '@APCHAssisted' }
   ]
@@ -62,13 +62,14 @@ export const SEO_CONFIG = {
 
 export const createStructuredData = (currentUrl: string) => ({
   "@context": "https://schema.org",
-  "@type": ["SeniorCare", "LocalBusiness"],
+  "@type": ["LocalBusiness", "AssistedLiving", "SeniorLiving"],
   "name": "A Place Called Home LLC",
-  "alternateName": "APCH",
-  "description": "Licensed Type B small-home assisted living facility providing 24/7 care, RN oversight, and medication management in DeSoto, TX",
+  "alternateName": ["APCH", "A Place Called Home Assisted Living", "DeSoto Senior Care Facility"],
+  "description": "Licensed Type B Residential Care Facility for the Elderly providing senior care facility services with 24/7 staff availability, professional care oversight, and medication support in DeSoto, TX",
+  "@id": currentUrl.split('#')[0] + "#localbusiness",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "521 Shenandoah Dr",
+    "streetAddress": "521 Shennandoah Dr",
     "addressLocality": "DeSoto",
     "addressRegion": "TX",
     "postalCode": "75115",
@@ -79,9 +80,10 @@ export const createStructuredData = (currentUrl: string) => ({
     "latitude": "32.5896",
     "longitude": "-96.8570"
   },
-  "telephone": "(469) 555-APCH",
-  "email": "info@apchllc.com",
+  "telephone": "(510) 939-0657",
+  "email": "support@apchllc.com",
   "url": currentUrl,
+  "hasMap": "https://maps.google.com/?q=521+Shennandoah+Dr,+DeSoto,+TX+75115",
   "priceRange": "$",
   "serviceArea": {
     "@type": "GeoCircle",
@@ -92,11 +94,27 @@ export const createStructuredData = (currentUrl: string) => ({
     },
     "geoRadius": "25"
   },
-  "areaServed": ["DeSoto, TX", "Dallas County, TX", "Cedar Hill, TX", "Duncanville, TX"],
+  "areaServed": [
+    "DeSoto, TX",
+    "Dallas, TX",
+    "Fort Worth, TX",
+    "Dallas–Fort Worth (DFW)",
+    "Dallas County, TX",
+    "Tarrant County, TX",
+    "Cedar Hill, TX",
+    "Duncanville, TX",
+    "Lancaster, TX",
+    "Red Oak, TX",
+    "Midlothian, TX",
+    "Waxahachie, TX",
+    "Mansfield, TX",
+    "Arlington, TX",
+    "Grand Prairie, TX"
+  ],
   "foundingDate": "2024",
   "openingHours": "Mo-Su 00:00-23:59",
   "currenciesAccepted": "USD",
-  "paymentAccepted": "Cash, Check, Insurance, Private Pay, Medicaid Waiver",
+  "paymentAccepted": "Cash, Check, Private Pay",
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
@@ -107,14 +125,18 @@ export const createStructuredData = (currentUrl: string) => ({
   "knowsAbout": [
     "Assisted Living",
     "Senior Care",
-    "Memory Care",
-    "Medication Management",
+    "Elderly Care",
+    "Residential Care Facility for the Elderly",
     "Type B Assisted Living",
-    "Residential Care",
-    "Elder Care",
-    "24/7 Care"
+    "Senior Living Facility",
+    "Elder Care Facility",
+    "Care Home",
+    "Senior Care Facility",
+    "Elderly Facility",
+    "Medication Support",
+    "24/7 Staff Availability"
   ],
-  "keywords": "assisted living, senior care, Type B assisted living, DeSoto TX, small home care, medication management, 24/7 care, RN oversight",
+  "keywords": "assisted living facility, senior care facility, elderly facility, care home, residential care facility for the elderly, assisted living, senior care, Type B assisted living, DeSoto TX, small home care, medication support, 24/7 staff availability, DFW assisted living, Dallas senior care, elderly care DeSoto",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Senior Care Services",
@@ -130,14 +152,21 @@ export const createStructuredData = (currentUrl: string) => ({
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Memory Care Services"
+          "name": "Medication Management"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Medication Management"
+          "name": "Residential Care Facility for the Elderly"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Senior Care Facility Services"
         }
       }
     ]
@@ -163,24 +192,30 @@ export const createBreadcrumbData = (currentUrl: string) => ({
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Locations",
-      "item": `${currentUrl}#locations`
+      "name": "Care & Support",
+      "item": `${currentUrl}#care-and-support`
     },
     {
       "@type": "ListItem",
       "position": 4,
-      "name": "Medical Care",
-      "item": `${currentUrl}#medical-care`
-    },
-    {
-      "@type": "ListItem",
-      "position": 5,
       "name": "Financial Assistance",
       "item": `${currentUrl}#financial`
     },
     {
       "@type": "ListItem",
+      "position": 5,
+      "name": "Licensing",
+      "item": `${currentUrl}#licensing`
+    },
+    {
+      "@type": "ListItem",
       "position": 6,
+      "name": "About",
+      "item": `${currentUrl}#about`
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
       "name": "Contact",
       "item": `${currentUrl}#contact`
     }

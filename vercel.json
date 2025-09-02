@@ -1,0 +1,11 @@
+{
+  "buildCommand": "vite build",
+  "outputDirectory": "build",
+  "routes": [
+    { "src": "/api/auth", "dest": "/api/auth" },
+    { "src": "/(.*)", "has": [{ "type": "cookie", "key": "site_auth", "value": "1" }], "continue": true },
+    { "src": "/(.*)", "dest": "/api/auth?redirect=/$1", "status": 302 },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}

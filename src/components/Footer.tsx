@@ -14,18 +14,19 @@ export default function Footer() {
 
   const quickLinks = [
     { label: 'Services', href: '#services' },
-    { label: 'Locations', href: '#locations' },
-    { label: 'Medical Care', href: '#medical-care' },
+    { label: 'Care & Support', href: '#care-and-support' },
     { label: 'Financial Assistance', href: '#financial' },
+    { label: 'Licensing', href: '#licensing' },
+    { label: 'About Us', href: '#about' },
     { label: 'Schedule Tour', href: '#schedule-tour' },
     { label: 'Contact Us', href: '#contact' }
   ];
 
   const legalLinks = [
-    { label: 'Privacy Policy', href: '#privacy' },
-    { label: 'Terms of Service', href: '#terms' },
-    { label: 'Accessibility Statement', href: '#accessibility' },
-    { label: 'Non-Discrimination Policy', href: '#non-discrimination' }
+    { label: 'Privacy Policy', href: '/policies/privacy.html' },
+    { label: 'Terms of Service', href: '/policies/terms.html' },
+    { label: 'Accessibility Statement', href: '/policies/accessibility.html' },
+    { label: 'Non-Discrimination Policy', href: '/policies/non-discrimination.html' }
   ];
 
   return (
@@ -59,16 +60,18 @@ export default function Footer() {
                 size="lg"
                 className="glass-button-outline"
               >
-                <Calendar className="w-5 h-5 mr-3" />
+                <Calendar className="w-5 h-5 mr-3" aria-hidden="true" />
                 Schedule a Tour
               </Button>
               <Button 
-                onClick={() => window.location.href = 'tel:(469) 555-APCH'}
+                asChild
                 size="lg"
                 className="glass-button"
               >
-                <Phone className="w-5 h-5 mr-3" />
-                Call (469) 555-APCH
+                <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                  <Phone className="w-5 h-5 mr-3" aria-hidden="true" />
+                  Call (510) 939-0657
+                </a>
               </Button>
             </div>
           </div>
@@ -88,7 +91,7 @@ export default function Footer() {
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full">
-                <Heart className="w-6 h-6 text-white" />
+                <Heart className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
               <div>
                 <div className="font-bold text-xl text-white">A Place Called Home</div>
@@ -96,8 +99,8 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-slate-300 mb-6 leading-relaxed">
-              Compassionate, 24/7 care in warm residential settings. Your loved one, 
-              cared for like family in DeSoto and Lancaster, Texas.
+              Compassionate, 24/7 care in a warm residential setting. Your loved one, 
+              cared for like family in DeSoto, Texas.
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm">
@@ -111,21 +114,21 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Locations */}
+          {/* Location */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-lg font-semibold text-white mb-6">Our Locations</h4>
+            <h4 className="text-lg font-semibold text-white mb-6">Our Location</h4>
             <div className="space-y-6">
               <div>
                 <div className="flex items-start gap-3 mb-2">
                   <MapPin className="w-5 h-5 text-blue-400 mt-1 flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-white">DeSoto - Shenandoah</p>
-                    <p className="text-slate-300 text-sm">521 Shenandoah Dr</p>
+                    <p className="font-medium text-white">DeSoto - Shennandoah</p>
+                    <p className="text-slate-300 text-sm">521 Shennandoah Dr</p>
                     <p className="text-slate-300 text-sm">DeSoto, TX 75115</p>
                     <p className="text-slate-400 text-xs">License: LICENSE-DESOTO-001</p>
                   </div>
@@ -135,12 +138,7 @@ export default function Footer() {
               <div>
                 <div className="flex items-start gap-3 mb-2">
                   <MapPin className="w-5 h-5 text-emerald-400 mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-white">Lancaster - Cedarbrook</p>
-                    <p className="text-slate-300 text-sm">1237 Cedarbrook Trail</p>
-                    <p className="text-slate-300 text-sm">Lancaster, TX 75146</p>
-                    <p className="text-slate-400 text-xs">License: LICENSE-LANCASTER-001</p>
-                  </div>
+                  <div></div>
                 </div>
               </div>
             </div>
@@ -177,23 +175,25 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-white mb-6">Contact & Hours</h4>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" aria-hidden="true" />
                 <div>
-                  <p className="font-medium text-white">(469) 555-APCH</p>
-                  <p className="text-slate-400 text-sm">Tap to call</p>
+                  <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657" className="font-medium text-white hover:underline">
+                    (510) 939-0657
+                  </a>
                 </div>
               </div>
               
               <div className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                <Mail className="w-5 h-5 text-emerald-400 flex-shrink-0" aria-hidden="true" />
                 <div>
-                  <p className="text-slate-300">info@apchllc.com</p>
-                  <p className="text-slate-400 text-sm">Email us anytime</p>
+                  <a href="mailto:support@apchllc.com" aria-label="Email support@apchllc.com" className="text-slate-300 hover:underline">
+                    support@apchllc.com
+                  </a>
                 </div>
               </div>
               
               <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" />
+                <Clock className="w-5 h-5 text-purple-400 mt-1 flex-shrink-0" aria-hidden="true" />
                 <div>
                   <p className="font-medium text-white">Business Hours</p>
                   <p className="text-slate-300 text-sm">Mon-Fri: 9 AM - 6 PM</p>
@@ -213,19 +213,22 @@ export default function Footer() {
             {/* Copyright */}
             <div className="text-slate-400 text-sm text-center lg:text-left">
               <p>&copy; {currentYear} A Place Called Home LLC. All rights reserved.</p>
-              <p className="mt-1">Licensed Type B Small Assisted Living Facilities in Texas</p>
+              <p className="mt-1">Licensed Type B Small Assisted Living in Texas</p>
+              <p className="mt-1 text-slate-500">
+                We provide assisted living services and coordinate with licensed healthcare providers. We do not provide nursing services or clinical care.
+              </p>
             </div>
             
             {/* Legal Links */}
             <div className="flex flex-wrap justify-center gap-6">
               {legalLinks.map((link) => (
-                <button
+                <a
                   key={link.label}
-                  onClick={() => scrollToSection(link.href)}
+                  href={link.href}
                   className="text-slate-400 hover:text-white transition-colors text-sm"
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
             </div>
           </div>

@@ -23,14 +23,14 @@ export default function NavigationBasic() {
   };
 
   const handleCallNow = () => {
-    window.location.href = 'tel:(469) 555-APCH';
+    window.location.href = 'tel:5109390657';
   };
 
   const mainNavItems = [
     { label: 'Home', href: '#home' },
     { label: 'Services', href: '#services' },
     { label: 'Locations', href: '#locations' },
-    { label: 'Medical Care', href: '#medical-care' },
+    { label: 'Care & Support', href: '#care-and-support' },
     { label: 'Financial', href: '#financial' },
     { label: 'Contact', href: '#contact' }
   ];
@@ -100,6 +100,8 @@ export default function NavigationBasic() {
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
               className={`p-2 rounded-lg ${isScrolled ? 'text-slate-800' : 'text-white'}`}
             >
               <Menu className="w-6 h-6" />
@@ -129,7 +131,7 @@ export default function NavigationBasic() {
                   className="glass-button justify-start py-3 px-4 rounded-lg flex items-center gap-3"
                 >
                   <Phone className="w-5 h-5" />
-                  Call Now: (469) 555-APCH
+                  Call Now: (510) 939-0657
                 </button>
                 <button
                   onClick={() => scrollToSection('#schedule-tour')}

@@ -1,23 +1,25 @@
 
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="en-US">
   <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="manifest" href="/manifest.json" />
       <meta name="theme-color" content="#1e293b" />
-      <link
-        rel="preload"
-        as="image"
-        href="https://images.unsplash.com/photo-1603129473525-4cd6f36fe057?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGVsZGVybHklMjByZXNpZGVudHMlMjBhc3Npc3RlZCUyMGxpdmluZyUyMGZhY2lsaXR5JTIwc21pbGluZyUyMHNlbmlvcnN8ZW58MXx8fHwxNzU2MzU2NzE5fDA&ixlib=rb-4.1.0&q=80&w=1920&utm_source=figma&utm_medium=referral"
-        imagesrcset="https://images.unsplash.com/photo-1603129473525-4cd6f36fe057?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGVsZGVybHklMjByZXNpZGVudHMlMjBhc3Npc3RlZCUyMGxpdmluZyUyMGZhY2lsaXR5JTIwc21pbGluZyUyMHNlbmlvcnN8ZW58MXx8fHwxNzU2MzU2NzE5fDA&ixlib=rb-4.1.0&q=80&w=768 768w, https://images.unsplash.com/photo-1603129473525-4cd6f36fe057?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGVsZGVybHklMjByZXNpZGVudHMlMjBhc3Npc3RlZCUyMGxpdmluZyUyMGZhY2lsaXR5JTIwc21pbGluZyUyMHNlbmlvcnN8ZW58MXx8fHwxNzU2MzU2NzE5fDA&ixlib=rb-4.1.0&q=80&w=1280 1280w, https://images.unsplash.com/photo-1603129473525-4cd6f36fe057?crop=entropy&cs=tinysrgb&fit=max&fm=webp&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGVsZGVybHklMjByZXNpZGVudHMlMjBhc3Npc3RlZCUyMGxpdmluZyUyMGZhY2lsaXR5JTIwc21pbGluZyUyMHNlbmlvcnN8ZW58MXx8fHwxNzU2MzU2NzE5fDA&ixlib=rb-4.1.0&q=80&w=1920 1920w"
-        imagesizes="100vw"
-        fetchpriority="high"
-      />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <!-- Early preconnects for fonts and hero host -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <style>
+        .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+        .skip-link:focus{position:absolute;left:1rem;top:1rem;width:auto;height:auto;z-index:10000;background:#111;color:#fff;padding:.5rem .75rem;border-radius:.375rem}
+      </style>
+      <!-- Removed image preload to avoid "preloaded but not used quickly" warning in some browsers. Hero eagerly loads with fetchpriority=high. -->
       <title>A Place Called Home</title>
     </head>
 
     <body>
+      <a href="#main-content" class="skip-link">Skip to main content</a>
       <div id="root"></div>
       <script type="module" src="/src/main.tsx"></script>
     </body>

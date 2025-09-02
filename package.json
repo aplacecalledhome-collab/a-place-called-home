@@ -41,6 +41,7 @@
             "react-hook-form": "^7.55.0",
             "react-resizable-panels": "^2.1.7",
             "recharts": "^2.15.2",
+            "sharp": "^0.34.3",
             "sonner": "^2.0.3",
             "tailwind-merge": "*",
             "tailwindcss": "*",
@@ -48,14 +49,32 @@
       },
       "devDependencies": {
             "@types/node": "^20.10.0",
+            "@types/react": "^19.1.12",
+            "@types/react-dom": "^19.1.9",
             "@vitejs/plugin-react-swc": "^3.10.2",
+            "cypress": "^13.14.2",
+            "deno-bin": "^1.46.3",
             "supabase": "^2.39.2",
+            "typescript": "^5.6.3",
             "vite": "6.3.5"
       },
       "scripts": {
             "dev": "vite",
             "build": "vite build",
+            "preview": "vite preview --host 127.0.0.1 --strictPort --port 5173",
+            "preview:3000": "vite preview --host 127.0.0.1 --strictPort --port 3000",
             "dev:functions": "supabase functions serve submit-tour --env-file supabase/functions/submit-tour/.env & supabase functions serve submit-contact --env-file supabase/functions/submit-contact/.env",
-            "dev:all": "bash scripts/dev-all.sh"
+            "dev:all": "bash scripts/dev-all.sh",
+            "deno:version": "deno --version",
+            "deno:submit-tour": "deno run --inspect --allow-net --allow-env --allow-read --unstable supabase/functions/submit-tour/index.ts",
+            "deno:submit-contact": "deno run --inspect --allow-net --allow-env --allow-read --unstable supabase/functions/submit-contact/index.ts",
+            "deno:watch:submit-tour": "deno run --watch --allow-net --allow-env --allow-read --unstable supabase/functions/submit-tour/index.ts",
+            "deno:watch:submit-contact": "deno run --watch --allow-net --allow-env --allow-read --unstable supabase/functions/submit-contact/index.ts",
+            "cypress:open": "cypress open",
+            "cypress:run": "cypress run",
+            "typecheck": "tsc --noEmit",
+            "scan:secrets": "bash scripts/scan-secrets.sh",
+            "hooks:install": "bash scripts/install-git-hook.sh",
+            "images:optimize": "node scripts/convert-images.mjs"
       }
 }

@@ -14,11 +14,11 @@ export const setMetaTags = (metaTags: Array<{ name: string; content: string }>) 
 export const setSocialTags = (socialTags: Array<{ property?: string; name?: string; content: string }>) => {
   socialTags.forEach(tag => {
     const attribute = tag.property ? 'property' : 'name';
-    const selector = tag.property ? `meta[property="${tag.property}"]` : `meta[name="${tag.name}"]`;
+    const selector = tag.property ? `meta[property=\"${tag.property}\"]` : `meta[name=\"${tag.name}\"]`;
     let existingTag = document.querySelector(selector);
     if (!existingTag) {
       existingTag = document.createElement('meta');
-      existingTag.setAttribute(attribute, tag.property || tag.name);
+      existingTag.setAttribute(attribute, tag.property || tag.name || '');
       document.head.appendChild(existingTag);
     }
     existingTag.setAttribute('content', tag.content);
@@ -35,13 +35,27 @@ export const setViewportMeta = () => {
 };
 
 export const setCanonicalUrl = (url: string) => {
+  // Normalize canonical: strip query/hash and prefer configured site origin if provided
   let canonicalLink = document.querySelector('link[rel="canonical"]');
   if (!canonicalLink) {
     canonicalLink = document.createElement('link');
     canonicalLink.setAttribute('rel', 'canonical');
     document.head.appendChild(canonicalLink);
   }
-  canonicalLink.setAttribute('href', url);
+  try {
+    const u = new URL(url);
+    const site = (import.meta as any).env?.VITE_SITE_URL as string | undefined;
+    let base = u.origin;
+    if (site) {
+      try {
+        base = new URL(site).origin;
+      } catch {}
+    }
+    const canonical = `${base}${u.pathname}`;
+    canonicalLink.setAttribute('href', canonical);
+  } catch {
+    canonicalLink.setAttribute('href', url);
+  }
 };
 
 export const setLanguageAttribute = (lang: string = 'en-US') => {
@@ -69,14 +83,14 @@ export const setFavicon = () => {
   const existingLinks = document.querySelectorAll('link[rel*="icon"]');
   existingLinks.forEach(link => link.remove());
   
-  // Set standard favicon
-  const favicon = document.createElement('link');
-  favicon.setAttribute('rel', 'icon');
-  favicon.setAttribute('type', 'image/x-icon');
-  favicon.setAttribute('href', '/favicon.ico');
-  document.head.appendChild(favicon);
+  // Prefer SVG heart favicon if available
+  const svgIcon = document.createElement('link');
+  svgIcon.setAttribute('rel', 'icon');
+  svgIcon.setAttribute('type', 'image/svg+xml');
+  svgIcon.setAttribute('href', '/favicon.svg');
+  document.head.appendChild(svgIcon);
   
-  // Set PNG favicons for different sizes
+  // Set PNG favicons for different sizes (fallbacks if provided)
   sizes.forEach(size => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'icon');

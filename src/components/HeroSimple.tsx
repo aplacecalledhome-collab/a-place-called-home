@@ -14,11 +14,11 @@ export default function HeroSimple() {
   };
 
   const handleCallNow = () => {
-    window.location.href = 'tel:(469) 555-APCH';
+    window.location.href = 'tel:5109390657';
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen pt-16 md:pt-20 flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <ImageWithFallback
@@ -32,7 +32,7 @@ export default function HeroSimple() {
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="glass-strong rounded-3xl p-8 md:p-12 shadow-2xl max-w-6xl mx-auto glow-effect">
+        <div className="glass-strong rounded-3xl p-8 md:p-12 shadow-2xl max-w-6xl mx-auto glow-effect -translate-y-4 sm:translate-y-0">
           {/* Trust Badge */}
           <div className="mb-6 flex justify-center">
             <div className="flex items-center gap-2 glass-subtle px-6 py-3 rounded-full">
@@ -54,16 +54,16 @@ export default function HeroSimple() {
           </p>
 
           <p className="text-lg md:text-xl text-white/85 mb-10 max-w-4xl mx-auto leading-relaxed">
-            Compassionate, 24/7 care in a warm residential setting with home-cooked meals, 
-            medication management, and RN oversight. Your loved one, cared for like family.
+            Compassionate, 24/7 staff availability in a warm residential setting with home‑cooked meals 
+            and medication support. Your loved one, cared for like family.
           </p>
 
           {/* Feature Icons */}
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-10">
             {[
               { icon: Users, text: "Up to 6 Residents", color: "text-blue-300" },
-              { icon: Heart, text: "24/7 Care", color: "text-red-300" },
-              { icon: Shield, text: "RN Oversight", color: "text-emerald-300" },
+              { icon: Heart, text: "24/7 Staff", color: "text-red-300" },
+              { icon: Shield, text: "Professional Care Oversight", color: "text-emerald-300" },
               { icon: Home, text: "Home-Style Living", color: "text-yellow-300" }
             ].map((feature, index) => (
               <div
@@ -84,7 +84,7 @@ export default function HeroSimple() {
               className="glass-button px-10 py-6 text-lg font-semibold hover:scale-105 transition-transform"
             >
               <Phone className="mr-3 w-6 h-6" />
-              Call Now: (469) 555-APCH
+              Call Now: (510) 939-0657
             </Button>
             
             <Button 

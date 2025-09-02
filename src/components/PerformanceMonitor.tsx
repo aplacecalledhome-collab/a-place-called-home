@@ -70,7 +70,8 @@ export default function PerformanceMonitor() {
       // Measure FID (First Input Delay)
       new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const fid = entry.processingStart - entry.startTime;
+          const e = entry as any;
+          const fid = (e.processingStart ?? e.startTime) - e.startTime;
           reportMetric({
             name: 'FID',
             value: fid,

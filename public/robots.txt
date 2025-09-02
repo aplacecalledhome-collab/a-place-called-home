@@ -1,3 +1,28 @@
 User-agent: *
 Allow: /
-Sitemap: https://apchllc.com/sitemap.xml
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.apchllc.com/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
+
+# Allow all important directories
+Allow: /images/
+Allow: /policies/
+Allow: /build/
+
+# Disallow admin or private areas (if any exist)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/

@@ -8,10 +8,10 @@ export default function Locations() {
   const locations = [
     {
       id: "desoto",
-      name: "Shenandoah",
+      name: "Shennandoah",
       city: "DeSoto",
-      address: "521 Shenandoah Dr, DeSoto, TX 75115",
-      phone: "(469) 555-APCH",
+      address: "521 Shennandoah Dr, DeSoto, TX 75115",
+      phone: "(510) 939-0657",
       license: "LICENSE-DESOTO-001",
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc3Npc3RlZCUyMGxpdmluZyUyMGhvbWUlMjBleHRlcmlvcnxlbnwxfHx8fDE3MzUzOTY5MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       features: [
@@ -97,7 +97,7 @@ export default function Locations() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
-                    fetchpriority="low"
+                    fetchPriority="low"
                     sizes="(min-width: 1024px) 800px, 100vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -267,9 +267,9 @@ export default function Locations() {
               <Calendar className="w-5 h-5 mr-3" />
               Schedule a Tour
             </Button>
-            <Button onClick={() => window.location.href = 'tel:(469) 555-APCH'} size="lg" variant="outline" className="border-slate-300">
+            <Button onClick={() => window.location.href = 'tel:5109390657'} size="lg" variant="outline" className="border-slate-300">
               <Phone className="w-5 h-5 mr-3" />
-              Call (469) 555-APCH
+              Call (510) 939-0657
             </Button>
           </div>
         </motion.div>

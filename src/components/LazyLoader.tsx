@@ -274,7 +274,7 @@ export function createLazyComponent<P extends object>(
   componentLoader: () => Promise<{ default: React.ComponentType<P> }>,
   fallback?: React.ReactNode
 ) {
-  return React.forwardRef<any, P>((props, ref) => {
+  return function LazyCreatedComponent(props: P) {
     const [Component, setComponent] = React.useState<React.ComponentType<P> | null>(null);
     const [isLoading, setIsLoading] = React.useState(true);
     const [error, setError] = React.useState<Error | null>(null);
@@ -323,6 +323,6 @@ export function createLazyComponent<P extends object>(
       return <ComponentSkeleton />;
     }
 
-    return <Component {...props} ref={ref} />;
-  });
+    return <Component {...(props as P)} />;
+  };
 }

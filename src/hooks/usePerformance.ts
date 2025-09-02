@@ -129,7 +129,7 @@ export function useMounted() {
 
 // Hook for managing previous value
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T>();
+  const ref = useRef<T | undefined>(undefined);
   
   useEffect(() => {
     ref.current = value;
@@ -187,8 +187,8 @@ export function useLoadingState(initialLoading = false) {
 
 // Hook for optimized animation frame callbacks
 export function useAnimationFrame(callback: (deltaTime: number) => void, running = true) {
-  const requestRef = useRef<number>();
-  const previousTimeRef = useRef<number>();
+  const requestRef = useRef<number | undefined>(undefined);
+  const previousTimeRef = useRef<number | undefined>(undefined);
 
   const animate = useCallback((time: number) => {
     if (previousTimeRef.current !== undefined) {

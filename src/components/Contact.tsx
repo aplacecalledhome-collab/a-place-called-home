@@ -14,12 +14,9 @@ import {
   Send,
   MessageCircle,
   Heart,
-  CheckCircle,
-  Users,
-  FileText
+  CheckCircle
 } from "lucide-react";
 import { submitContactRequest } from "../utils/api";
-import { getHCaptchaToken } from "../utils/hcaptcha";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -35,6 +32,7 @@ export default function Contact() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -42,13 +40,19 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     try {
       setIsSubmitting(true);
+      if (!formData.preferredContact || !formData.preferredTime) {
+        setError('Please select your preferred contact method and the best time to reach you.');
+        return;
+      }
       const apiBase = import.meta.env.VITE_SUPABASE_FUNCTIONS_URL as string;
       if (!apiBase) throw new Error('Missing VITE_SUPABASE_FUNCTIONS_URL');
       const sitekey = import.meta.env.VITE_HCAPTCHA_SITEKEY as string | undefined;
       let captchaToken: string | undefined;
       if (sitekey) {
+        const { getHCaptchaToken } = await import("../utils/hcaptcha");
         captchaToken = await getHCaptchaToken(sitekey);
       }
       // include a hidden honeypot field as empty
@@ -56,7 +60,7 @@ export default function Contact() {
       setIsSubmitted(true);
     } catch (err) {
       console.error('Contact submit failed:', err);
-      alert('Sorry, we could not send your message right now. Please try again.');
+      setError((err as Error)?.message || 'Sorry, we could not send your message right now. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -84,13 +88,15 @@ export default function Contact() {
             </div>
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Message Received!</h2>
             <p className="text-lg text-slate-600 mb-6">
-              Thank you for contacting A Place Called Home. We'll respond within 1 business hour 
-              during our business hours (9 AM - 6 PM, Monday through Friday).
+              Thank you for contacting A Place Called Home. We’ll respond within 1 business day
+              during our business hours (9 AM – 6 PM, Monday through Friday).
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={() => window.location.href = 'tel:(469) 555-APCH'} className="glass-button">
-                <Phone className="w-5 h-5 mr-3" />
-                Call Us Now
+              <Button asChild className="glass-button">
+                <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                  <Phone className="w-5 h-5 mr-3" />
+                  Call Us Now
+                </a>
               </Button>
               <Button onClick={() => setIsSubmitted(false)} variant="outline" className="border-slate-300">
                 Send Another Message
@@ -152,7 +158,7 @@ export default function Contact() {
                   <Send className="w-7 h-7 text-blue-600" />
                   Send Us a Message
                 </CardTitle>
-                <p className="text-slate-600">We reply within 1 business hour, 9 AM - 6 PM</p>
+                <p className="text-slate-600">We reply within 1 business day, 9 AM - 6 PM</p>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -169,9 +175,9 @@ export default function Contact() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="email">Email *</Label>
+                      <Label htmlFor="contact-email">Email *</Label>
                       <Input
-                        id="email"
+                        id="contact-email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
@@ -180,9 +186,9 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Phone *</Label>
+                      <Label htmlFor="contact-phone">Phone *</Label>
                       <Input
-                        id="phone"
+                        id="contact-phone"
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -194,7 +200,7 @@ export default function Contact() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="preferredContact">Preferred Contact Method</Label>
+                      <Label htmlFor="preferredContact">Preferred Contact Method *</Label>
                       <Select value={formData.preferredContact} onValueChange={(value) => handleInputChange('preferredContact', value)}>
                         <SelectTrigger className="mt-1">
                           <SelectValue placeholder="How should we contact you?" />
@@ -208,7 +214,7 @@ export default function Contact() {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="preferredTime">Best Time to Contact</Label>
+                      <Label htmlFor="preferredTime">Best Time to Contact *</Label>
                       <Select value={formData.preferredTime} onValueChange={(value) => handleInputChange('preferredTime', value)}>
                         <SelectTrigger className="mt-1">
                           <SelectValue placeholder="When is best?" />
@@ -269,6 +275,11 @@ export default function Contact() {
                     />
                   </div>
 
+                  {error && (
+                    <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
+                      {error}
+                    </div>
+                  )}
                   <Button type="submit" size="lg" disabled={isSubmitting} className="w-full glass-button">
                     <Send className="w-5 h-5 mr-3" />
                     {isSubmitting ? 'Sending…' : 'Send Message'}
@@ -287,7 +298,7 @@ export default function Contact() {
             className="space-y-8"
           >
             {/* Quick Contact */}
-            <Card className="glass-subtle border-0 bg-gradient-to-br from-blue-500 to-emerald-500 text-white">
+            <Card className="border-0 bg-gradient-to-br from-blue-600 via-emerald-600 to-blue-700 text-white shadow-xl">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <Phone className="w-7 h-7" />
@@ -295,16 +306,14 @@ export default function Contact() {
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-3xl font-bold mb-2">(469) 555-APCH</p>
+                    <p className="text-3xl font-bold mb-2">(510) 939-0657</p>
                     <p className="text-blue-100">Tap to call from mobile device</p>
                   </div>
-                  <Button 
-                    onClick={() => window.location.href = 'tel:(469) 555-APCH'}
-                    size="lg"
-                    className="bg-white text-blue-600 hover:bg-blue-50 font-semibold w-full"
-                  >
-                    <Phone className="w-5 h-5 mr-3" />
-                    Call Now
+                  <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-blue-50 font-semibold w-full">
+                    <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                      <Phone className="w-5 h-5 mr-3" />
+                      Call Now
+                    </a>
                   </Button>
                 </div>
               </CardContent>
@@ -326,11 +335,11 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900 mb-1">Response Promise</p>
-                  <p className="text-slate-600">We reply within 1 business hour during business hours</p>
+                  <p className="text-slate-600">We reply within 1 business day during business hours</p>
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900 mb-1">Emergency Contact</p>
-                  <p className="text-slate-600">After hours emergencies: Call (469) 555-APCH</p>
+                  <p className="text-slate-600">After hours emergencies: Call (510) 939-0657</p>
                 </div>
               </CardContent>
             </Card>
@@ -345,8 +354,8 @@ export default function Contact() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <p className="font-semibold text-slate-900 mb-1">DeSoto - Shenandoah</p>
-                  <p className="text-slate-600">521 Shenandoah Dr, DeSoto, TX 75115</p>
+                  <p className="font-semibold text-slate-900 mb-1">DeSoto — Shennandoah</p>
+                  <p className="text-slate-600">521 Shennandoah Dr, DeSoto, TX 75115</p>
                 </div>
                 <div className="pt-2">
                   <p className="text-sm text-slate-500">
@@ -356,23 +365,7 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            {/* Professional Referrers */}
-            <Card className="glass-subtle border-0 bg-slate-50">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <Users className="w-6 h-6 text-purple-600" />
-                  <h3 className="text-lg font-semibold text-slate-900">Professional Referrers</h3>
-                </div>
-                <p className="text-slate-600 mb-4">
-                  Hospital case managers, social workers, and healthcare professionals: 
-                  Use our secure referral form for faster placement coordination.
-                </p>
-                <Button onClick={scrollToReferral} variant="outline" className="border-purple-300 text-purple-700 hover:bg-purple-50">
-                  <FileText className="w-4 h-4 mr-2" />
-                  Professional Referral Form
-                </Button>
-              </CardContent>
-            </Card>
+            {/* Professional Referrers card temporarily removed by request */}
           </motion.div>
         </div>
 
@@ -391,13 +384,17 @@ export default function Contact() {
             model is the right fit.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button onClick={() => window.location.href = 'tel:(469) 555-APCH'} size="lg" className="glass-button">
-              <Phone className="w-5 h-5 mr-3" />
-              Call (469) 555-APCH
+            <Button asChild size="lg" className="glass-button">
+              <a href="tel:5109390657" aria-label="Call A Place Called Home at (510) 939-0657">
+                <Phone className="w-5 h-5 mr-3" />
+                Call (510) 939-0657
+              </a>
             </Button>
-            <Button onClick={() => window.location.href = 'mailto:info@apchllc.com'} size="lg" variant="outline" className="border-slate-300">
-              <Mail className="w-5 h-5 mr-3" />
-              Email info@apchllc.com
+            <Button asChild size="lg" variant="outline" className="border-slate-300">
+              <a href="mailto:support@apchllc.com" aria-label="Email support@apchllc.com">
+                <Mail className="w-5 h-5 mr-3" />
+                Email support@apchllc.com
+              </a>
             </Button>
           </div>
         </motion.div>

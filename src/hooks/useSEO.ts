@@ -60,6 +60,79 @@ export const useSEO = () => {
       const breadcrumbData = createBreadcrumbData(currentUrl);
       setStructuredData(breadcrumbData, 'breadcrumb');
 
+      // Add a small FAQ schema to capture common queries in search (eligible for rich results)
+      const faq = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What type of assisted living is A Place Called Home?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We are a licensed Type B small-home assisted living residence in DeSoto, TX, serving up to six residents with 24/7 care."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you provide medication management?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We coordinate medication management and care plans in accordance with Texas HHS requirements."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I schedule a tour?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use the Schedule a Tour form on our website or call (510) 939-0657. We'll confirm your appointment and send directions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a Residential Care Facility for the Elderly?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Residential Care Facility for the Elderly (RCFE) is a licensed facility that provides housing, meals, and personal care services for seniors who need assistance with daily activities but don't require 24-hour medical care."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes your senior care facility different from nursing homes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Unlike nursing homes, our senior care facility provides a home-like environment with personalized care, allowing residents to maintain independence while receiving the assistance they need with daily activities, medication management, and personal care."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you offer respite care services?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we offer respite care services for families who need temporary relief while caring for their elderly loved ones. This can be arranged for short-term stays."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What areas do you serve in the DFW metroplex?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We primarily serve DeSoto, TX and surrounding areas including Dallas, Cedar Hill, Duncanville, Lancaster, and other communities within a 25-mile radius of our location."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Type B assisted living?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Type B assisted living in Texas is designed for residents who need more assistance with daily activities and may have mild cognitive impairments. We provide 24/7 staff availability and can assist with medication management, personal care, and daily living activities."
+            }
+          }
+        ]
+      };
+      setStructuredData(faq, 'faq');
+
       const organizationData = {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -67,9 +140,10 @@ export const useSEO = () => {
         "alternateName": "APCH",
         "url": baseUrl,
         "logo": `${baseUrl}/logo.png`,
+        "@id": `${baseUrl}#organization`,
         "contactPoint": {
           "@type": "ContactPoint",
-          "telephone": "(469) 555-APCH",
+          "telephone": "(510) 939-0657",
           "contactType": "customer service",
           "areaServed": "US",
           "availableLanguage": "en"
@@ -86,6 +160,7 @@ export const useSEO = () => {
         "@type": "WebSite",
         "name": "A Place Called Home LLC",
         "url": baseUrl,
+        "@id": `${baseUrl}#website`,
         "potentialAction": {
           "@type": "SearchAction",
           "target": {
@@ -122,10 +197,39 @@ export const useSEO = () => {
         document.head.appendChild(performanceHints);
       }
 
-      const contentSecurityPolicy = document.createElement('meta');
-      contentSecurityPolicy.setAttribute('http-equiv', 'Content-Security-Policy');
-      contentSecurityPolicy.setAttribute('content', "default-src 'self'; img-src 'self' https: data:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; script-src 'self';");
-      if (!document.querySelector('meta[http-equiv="Content-Security-Policy"]')) {
+      // Build a CSP that allows calling our Supabase Edge Functions
+      const primaryFuncs = (import.meta.env.VITE_SUPABASE_FUNCTIONS_URL as string | undefined) || '';
+      const fallbackFuncs = (import.meta.env.VITE_SUPABASE_FUNCTIONS_URL_FALLBACK as string | undefined) || '';
+      const origins = new Set<string>();
+      const addOrigin = (url: string) => {
+        try {
+          if (url) origins.add(new URL(url).origin);
+        } catch { /* ignore invalid */ }
+      };
+      addOrigin(primaryFuncs);
+      addOrigin(fallbackFuncs);
+      // Reasonable dev defaults if not set via env
+      addOrigin('http://localhost:54321');
+      // Allow any Supabase functions origin by default in dev
+      origins.add('https://*.supabase.co');
+
+      const connectSrc = ["'self'", ...Array.from(origins)].join(' ');
+      const cspContent = [
+        "default-src 'self'",
+        `connect-src ${connectSrc}`,
+        "img-src 'self' https: data:",
+        "style-src 'self' https://fonts.googleapis.com 'unsafe-inline'",
+        "font-src 'self' https://fonts.gstatic.com",
+        "script-src 'self'",
+      ].join('; ') + ';';
+
+      const existingCsp = document.querySelector('meta[http-equiv="Content-Security-Policy"]') as HTMLMetaElement | null;
+      if (existingCsp) {
+        existingCsp.setAttribute('content', cspContent);
+      } else {
+        const contentSecurityPolicy = document.createElement('meta');
+        contentSecurityPolicy.setAttribute('http-equiv', 'Content-Security-Policy');
+        contentSecurityPolicy.setAttribute('content', cspContent);
         document.head.appendChild(contentSecurityPolicy);
       }
 

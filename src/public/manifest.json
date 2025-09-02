@@ -1,9 +1,0 @@
-{
-  "name": "A Place Called Home LLC",
-  "short_name": "APCH",
-  "description": "Licensed Type B small-home assisted living facility in DeSoto, TX",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#1e40af",
-  "theme_color": "#1e40af"
-}
